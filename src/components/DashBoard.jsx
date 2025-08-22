@@ -1,4 +1,4 @@
-import { Layout, List, Menu, Popconfirm, Table } from "antd";
+import { Layout, List, Menu, Popconfirm, Table, Skeleton } from "antd";
 import { HomeOutlined, UserOutlined, SettingOutlined } from "@ant-design/icons";
 import logoHeader from "./MyImg/CompanyLogo1Black.png";
 import { Link as RouterLink } from "react-router-dom";
@@ -82,7 +82,13 @@ export default function DashBoard() {
       ),
     },
   ];
-
+  if (loading) {
+    return (
+      <>
+        <Skeleton active />
+      </>
+    );
+  }
   return (
     <Layout
       style={{
@@ -159,7 +165,7 @@ export default function DashBoard() {
           dataSource={userList}
           columns={cols}
           rowKey="id"
-          pagination={{ pageSize: 12 }}
+          pagination={{ pageSize: 9 }}
           size="middle"
           scroll={{ x: "max-content" }}
           style={{ width: "100%" }}

@@ -63,12 +63,12 @@ export default function UserDetail() {
   return (
     <Card
       title={
-        <Space style={{ justifyContent: "space-between", width: "100%" }}>
+        <Space style={{ gap: 30, width: "100%" }}>
           <Typography strong style={{ fontSize: "1.2rem" }}>
             User Detail
           </Typography>
           <Space>
-            <MuiBtn variant="outlined" onClick={() => navigate(-1)}>
+            <MuiBtn variant="contained" onClick={() => navigate(-1)}>
               Back
             </MuiBtn>
             <MuiBtn variant="outlined" component={RouterLink} to={"/"}>
@@ -111,8 +111,8 @@ export default function UserDetail() {
             ),
           },
           {
-            key: "adress",
-            label: "Adress",
+            key: "address",
+            label: "Address",
             children: address
               ? `${address.suite}, ${address.street}, ${address.city}, ${address.zipcode}`
               : "_",

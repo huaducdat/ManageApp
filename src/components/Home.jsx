@@ -21,9 +21,9 @@ import {
 } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import bg from "./MyImg/self-storage-all.png";
-import { type } from "@testing-library/user-event/dist/type";
+
 import logo from "./MyImg/CompanyLogo1.png";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const { Title, Text, Link } = Typography;
 
 export default function Home() {

@@ -5,7 +5,6 @@ import { Link as RouterLink } from "react-router-dom";
 import { Link as MuiLink, Typography, Button, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { render } from "@testing-library/react";
 
 export default function DashBoard() {
   const [userList, setUL] = useState([]);
@@ -52,7 +51,7 @@ export default function DashBoard() {
           <Button
             variant="contained"
             component={RouterLink}
-            to={`/DashBoard/${record.id}`}
+            to={`/users/${record.id}`}
           >
             View Detail
           </Button>
@@ -123,7 +122,7 @@ export default function DashBoard() {
             textAlign: "center",
             py: 1,
             width: "100%",
-            background: "rgba(128, 128, 128, 1)",
+            background: "rgba(100, 167, 255, 1)",
           }}
         >
           User Manager
@@ -132,8 +131,9 @@ export default function DashBoard() {
           dataSource={userList}
           columns={cols}
           rowKey="id"
-          pagination={{ pageSize: 9 }}
+          pagination={{ pageSize: 12 }}
           size="middle"
+          scroll={{ x: "max-content" }}
         />
       </Layout.Content>
     </Layout>

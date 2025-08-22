@@ -99,8 +99,67 @@ export default function UserDetail() {
             label: "Phone",
             children: <a href={`tel:${phone}`}>{phone}</a>,
           },
+          {
+            key: "website",
+            label: "Website",
+            children: website ? (
+              <a href={`http://${website}`} target="_blank" rel="noreferer">
+                {website}
+              </a>
+            ) : (
+              "_"
+            ),
+          },
+          {
+            key: "adress",
+            label: "Adress",
+            children: address
+              ? `${address.suite}, ${address.street}, ${address.city}, ${address.zipcode}`
+              : "_",
+          },
+          {
+            key: "company",
+            label: "Company",
+            children: company
+              ? `${company.name} - ${company.catchPhrase}`
+              : "_",
+          },
         ]}
       />
+      <Space
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          marginTop: 30,
+        }}
+      >
+        <Button
+          style={{ width: 180 }}
+          type="primary"
+          onClick={() =>
+            window.open(
+              `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                `${address?.suite || ""} ${address?.street || ""} ${
+                  address?.city || ""
+                }`
+              )}`,
+              "_blank"
+            )
+          }
+          disabled={!address}
+        >
+          View on Map
+        </Button>
+        <Button
+          style={{ width: 180 }}
+          type="default"
+          onClick={() => navigate(`/users/${id}`)}
+        >
+          Refresh
+        </Button>
+      </Space>
     </Card>
   );
 }

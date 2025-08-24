@@ -1,4 +1,4 @@
-import { Layout, List, Menu, Popconfirm, Table, Skeleton } from "antd";
+import { Layout, List, Menu, Popconfirm, Table, Skeleton, message } from "antd";
 import { HomeOutlined, UserOutlined, SettingOutlined } from "@ant-design/icons";
 import logoHeader from "./MyImg/CompanyLogo1Black.png";
 import { Link as RouterLink } from "react-router-dom";
@@ -9,6 +9,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditFrom from "./EditFrom";
+import { Email } from "@mui/icons-material";
 
 export default function DashBoard() {
   const [editting, setEditting] = useState(null);
@@ -36,7 +37,39 @@ export default function DashBoard() {
     setOpen(false);
     setEditting(null);
   };
-  const handleSave = () => {};
+  const handleSave = async (values) => {
+    if (editting) {
+      setUL((prev) =>
+        prev.map((u) =>
+          u.id === editting.id
+            ? {
+                ...u,
+                name: values.name,
+                username: values.username,
+                email: values.email,
+                phone: values.phone,
+                website: values.website,
+                address: {
+                  ...(u.address || {}),
+                  suite: values.address?.suite ?? u.address?.suite ?? "",
+                  street: values.address?.street ?? u.address?.street ?? "",
+                  city: values.address?.city ?? u.address?.city ?? "",
+                  zipcode: values.address.zipcode ?? u.address?.zipcode ?? "",
+                },
+              }
+            : u
+        )
+      );
+      handleCancel();
+      message.success("User updated.");
+    }
+  };
+
+  const handleAdd = async (values) => {
+    setUL([values, ...userList]);
+    handleCancel();
+    message.success("Add.");
+  };
 
   const cols = [
     { title: "ID", dataIndex: "id", key: "id" },
@@ -187,6 +220,7 @@ export default function DashBoard() {
           onCancel={handleCancel}
           onSave={handleSave}
           user={editting}
+          onAdd={handleAdd}
         />
       </Layout.Content>
     </Layout>
